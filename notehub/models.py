@@ -7,7 +7,7 @@ from datetime import date
 # Create your models here.
 
 class Student(models.Model):
-    DNI = models.TextField()
+    DNI = models.CharField(max_length=20)
     name = models.TextField()
     mail = models.EmailField()
     starting_year = models.DateField()
@@ -25,6 +25,7 @@ class Student(models.Model):
 class Document(models.Model):
     name = models.CharField(max_length=50)
     creator = models.ForeignKey(Student, default=1, on_delete=models.CASCADE)
+    content = models.TextField(blank=True, null=True)
     degree = models.TextField()
     subject = models.TextField()
     last_update = models.DateField(default=date.today)
@@ -56,8 +57,10 @@ class Notes(Document):
 
 
 class Valoration(models.Model):
+    RATING_CHOICES = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
+
+    rating = models.PositiveSmallIntegerField(blank=False, choices=RATING_CHOICES)
     document = models.ForeignKey(Document, default=1, on_delete=models.CASCADE)
-    rate = models.IntegerField()
     comment = models.TextField()
     student = models.ForeignKey(Student, default=1, on_delete=models.CASCADE)
     date = models.DateField()

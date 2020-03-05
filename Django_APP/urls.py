@@ -17,11 +17,13 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 
-from notehub.views import intro
+from notehub.views import intro, register, sign_in
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #url(r'^notehub/', include(('notehub.urls', 'notehub'),
      #                               namespace='notehub')),
     url(r'^$', intro, name='notehub'),
+    url(r'^register/', register, name='notehub'),
+    url(r'^sign_in/', sign_in, name='notehub'),
 ]
