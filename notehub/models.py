@@ -31,7 +31,7 @@ class Document(models.Model):
     average_valoration = models.IntegerField()
 
     def __str__(self):
-        return u"%s" % self.subject + " | " + self.name
+        return u"%s" % self.degree + " | " + self.subject + " | " + self.name
 
     #def get_absolute_url(self):
      #   return reverse('notehub:document',
