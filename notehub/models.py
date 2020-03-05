@@ -31,11 +31,11 @@ class Document(models.Model):
     average_valoration = models.IntegerField()
 
     def __str__(self):
-        return u"%s" % self.subject + " " + self.name
+        return u"%s" % self.subject + " | " + self.name
 
-    def get_absolute_url(self):
-        return reverse('notehub:document',
-                       kwargs={'pkr': self.document.pk, 'pk': self.pk})
+    #def get_absolute_url(self):
+     #   return reverse('notehub:document',
+      #                 kwargs={'pkr': self.document.pk, 'pk': self.pk})
 
 
 class Exercice(Document):
@@ -61,3 +61,6 @@ class Valoration(models.Model):
     comment = models.TextField()
     student = models.ForeignKey(Student, default=1, on_delete=models.CASCADE)
     date = models.DateField()
+
+    def __str__(self):
+        return u"%s" % "Valoration " + str(self.id) + " of " + self.document.name
