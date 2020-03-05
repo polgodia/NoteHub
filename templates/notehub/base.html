@@ -1,10 +1,23 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>VISTA BASICA</title>
+     <link rel="stylesheet" href="{% static "style/base.css" %}" />
+     <title>{% block title %} Notehub.org{% endblock %}</title>
 </head>
 <body>
-
+<div id="header">
+     {% block header %}
+     {% endblock %}
+</div>
+<div id="sidebar">
+    {% block sidebar %}<ul><li><a href="/notehub">Home</a></li></ul>{% endblock %}
+</div>
+<div id="content">
+     {% block content %}
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+     {% endblock %}
+</div>
+<div id="footer">{% block footer %}{% endblock %}</div>
 </body>
 </html>
