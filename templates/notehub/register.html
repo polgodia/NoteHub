@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Register{% endblock %}</title>
-</head>
-<body>
-Aqui per registrarse
-</body>
+<form action="ejemplo.php" method="get">
+  <p>Name: <input type="text" name="nombre" size="40"></p>
+  <p>starting_year: <input type="number" name="año de inicio" min="2000"></p>
+  <p>DNI: <input type="text" name="DNI" size="40"></p>
+  <p>mail: <input type="text" name="e-mail" size="80"></p>
+  <p>
+    <input type="submit" value="Enviar">
+    <input type="reset" value="Borrar">
+  </p>
+</form>
 </html>
+
