@@ -6,12 +6,9 @@ from datetime import date
 
 # Create your models here.
 
-class Student(models.Model):
-    DNI = models.CharField(max_length=20)
-    name = models.TextField()
-    mail = models.EmailField()
-    password = models.CharField(max_length=50)
-    starting_year = models.DateField()
+class Student(User):
+    DNI = models.CharField(max_length=20, unique=True)
+    starting_date = models.DateField()
     #subjects = models.TextField()
     average_valoration = models.FloatField(blank=True, null=True)
 
