@@ -5,21 +5,27 @@ from datetime import date
 
 
 # Create your models here.
-
-class Student(models.Model):
+class User(models.Model):
     DNI = models.CharField(max_length=20)
     name = models.TextField()
     mail = models.EmailField()
+    password = models.CharField(max_length=50)
+
+
+class Student(User):
     starting_year = models.DateField()
-    #subjects = models.TextField()
+    # subjects = models.TextField()
     average_valoration = models.FloatField(blank=True, null=True)
+
+
+class Viewer(User):
 
     def __str__(self):
         return u"%s" % self.name
 
-    #def get_absolute_url(self):
-     #   return reverse('myrestaurants:dish_detail',
-     #                  kwargs={'pkr': self.restaurant.pk, 'pk': self.pk})
+    # def get_absolute_url(self):
+    #   return reverse('myrestaurants:dish_detail',
+    #                  kwargs={'pkr': self.restaurant.pk, 'pk': self.pk})
 
 
 class Document(models.Model):
@@ -34,9 +40,9 @@ class Document(models.Model):
     def __str__(self):
         return u"%s" % self.degree + " | " + self.subject + " | " + self.name
 
-    #def get_absolute_url(self):
-     #   return reverse('notehub:document',
-      #                 kwargs={'pkr': self.document.pk, 'pk': self.pk})
+    # def get_absolute_url(self):
+    #   return reverse('notehub:document',
+    #                 kwargs={'pkr': self.document.pk, 'pk': self.pk})
 
 
 class Exercice(Document):
