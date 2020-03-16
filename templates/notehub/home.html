@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
      <link rel="stylesheet" href="{% static "style/base.css" %}" />
-     <title>{% block title %} Notehub{% endblock %}</title>
+     <title>{% block title %} Home{% endblock %}</title>
 </head>
 <body>
 <div id="header">
@@ -17,9 +17,9 @@
 </div>
 <a href="/admin">Access as Admin</a>
 <hr />
-<a href="/register">Register</a>
+<a href="/notehub/register">Register</a>
 <hr />
-<a href="/sign_in">Sign in</a>
+<a href="/notehub/sign_in">Sign in</a>
 <div id="footer">{% block footer %}{% endblock %}</div>
 </body>
 </html>

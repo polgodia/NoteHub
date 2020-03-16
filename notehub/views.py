@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views.generic import DetailView
@@ -6,15 +7,33 @@ from django.views.generic import DetailView
 from notehub.models import Student
 
 
-def intro(request):
-    template_name = 'notehub/base.html'
-    return render(request,template_name,context={'title': 'app_name'})
+def home(request):
+    template_name = 'notehub/home.html'
+    return render(request, template_name, context={'title': 'app_name'})
+
 
 def register(request):
     template_name = 'notehub/register.html'
-    return render(request,template_name,context={'title': 'register'})
+    return render(request, template_name, context={'title': 'register'})
+
 
 def sign_in(request):
     template_name = 'notehub/sign_in.html'
-    return render(request,template_name,context={'title': 'sign_in'})
+    return render(request, template_name, context={'title': 'sign_in'})
 
+def documents_list(request):
+    template_name = 'notehub/documents_list.html'
+    return  render(request,template_name)
+
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #log the user in
+            return redirect('notehub/home.html')
+    else:
+        template_name = 'notehub/signup.html'
+        form = UserCreationForm()
+    return render(request, template_name, context={'form': form})
