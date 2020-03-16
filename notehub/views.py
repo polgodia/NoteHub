@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.views.generic import DetailView
 
-from notehub.models import Student
+from notehub.models import Student, Document
 
 
 def home(request):
@@ -22,8 +22,15 @@ def sign_in(request):
     return render(request, template_name, context={'title': 'sign_in'})
 
 def documents_list(request):
+    documents = Document.objects.all().order_by('id')
     template_name = 'notehub/documents_list.html'
-    return  render(request,template_name)
+    return  render(request,template_name, {'documents': documents})
+
+
+
+
+
+
 
 
 def signup_view(request):
