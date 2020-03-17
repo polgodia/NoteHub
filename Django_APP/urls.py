@@ -15,12 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 
-from notehub.views import home
+from notehub.views import home, register, sign_in, signup_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', home, name='notehub'),
+    url(r'^register/', register, name='register'),
+    url(r'^sign_in/', sign_in, name='sign_in'),
+    url(r'^signup/', signup_view, name='signup'),
     url(r'^notehub/', include('notehub.urls')),
 ]
+
+urlpatterns += staticfiles_urlpatterns()

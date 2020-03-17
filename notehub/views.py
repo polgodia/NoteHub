@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -26,7 +27,10 @@ def documents_list(request):
     template_name = 'notehub/documents_list.html'
     return  render(request,template_name, {'documents': documents})
 
-
+def document_detail(request, id):
+    document = Document.objects.get(id=id)
+    return render(request, 'notehub/document_detail.html', {'document':document})
+    #return HttpResponse(id)
 
 
 
@@ -39,8 +43,7 @@ def signup_view(request):
         if form.is_valid():
             form.save()
             #log the user in
-            return redirect('notehub/home.html')
+            return redirect('notehub:list')
     else:
-        template_name = 'notehub/signup.html'
         form = UserCreationForm()
-    return render(request, template_name, context={'form': form})
+    return render(request, 'notehub/signup.html', context={'form': form})

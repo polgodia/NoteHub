@@ -8,6 +8,7 @@ from datetime import date
 
 class Student(User):
     DNI = models.CharField(max_length=20, unique=True)
+    degree = models.CharField(max_length=50)
     starting_date = models.DateField()
     #subjects = models.TextField()
     average_valoration = models.FloatField(blank=True, null=True)
