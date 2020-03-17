@@ -62,7 +62,7 @@ class Valoration(models.Model):
     rating = models.PositiveSmallIntegerField(blank=False, choices=RATING_CHOICES)
     document = models.ForeignKey(Document, on_delete=models.CASCADE)
     comment = models.TextField()
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return u"%s" % "Valoration " + str(self.id) + " of " + self.document.name

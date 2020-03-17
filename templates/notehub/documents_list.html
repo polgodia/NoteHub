@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documents</title>
+</head>
+<body>
+    <h1>Document list</h1>
+    <div class="documents">
+        {% for document in documents%}
+            <div class="document">
+                <h2><a href="#">{{ document.name }}</a></h2>
+                <p>{{ document.content }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
