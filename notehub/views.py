@@ -23,6 +23,10 @@ def sign_in(request):
     template_name = 'notehub/sign_in.html'
     return render(request, template_name, context={'title': 'sign_in'})
 
+def return_view(request):
+    template_name = 'notehub/return_view()'
+    return render(request, template_name, context={'title': 'return'})
+
 def documents_list(request):
     documents = Document.objects.all().order_by('id')
     template_name = 'notehub/documents_list.html'
@@ -62,3 +66,4 @@ def logout_view(request):
     if request.method == 'POST':
         logout(request)
         return redirect('notehub:list')
+
