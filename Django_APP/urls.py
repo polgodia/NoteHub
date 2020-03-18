@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 
-from notehub.views import home, register, sign_in, signup_view, login_view, logout_view
+from notehub.views import home, register, sign_in, signup_view, login_view, logout_view,return_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
