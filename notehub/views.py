@@ -2,6 +2,8 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from notehub.forms import LoginForm
+from django.utils import timezone
 
 # Create your views here.
 from django.views.generic import DetailView
@@ -41,13 +43,16 @@ def document_detail(request, id):
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            student = Student(username=form.cleaned_data['username'], password=form.cleaned_data['password'],
+                              DNI=form.cleaned_data['DNI'],
+                              degree=form.cleaned_data['degree'],
+                              starting_date=form.cleaned_data['starting_date'])
+            student.save()
             return redirect('notehub:list')
     else:
-        form = UserCreationForm()
+        form = LoginForm()
     return render(request, 'notehub/signup.html', context={'form': form})
 
 
