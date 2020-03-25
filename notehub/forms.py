@@ -2,7 +2,6 @@ from datetime import datetime
 from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError
-
 from notehub.models import Student, Document
 
 
@@ -33,10 +32,10 @@ class SignupForm(ModelForm):
 
 class AddDocumentForm(ModelForm):
     name = forms.CharField(max_length=50, required=True)
-    content = forms.CharField(blank=True, null=True, required=True)
+    content = forms.CharField(max_length=2000, required=True)
     degree = forms.CharField(max_length=50, required=True)
     subject = forms.CharField(max_length=50, required=True)
-    last_update = forms.DateField(default=datetime.date.today(), required=True)
+    last_update = forms.DateField(required=True)
 
     class Meta:
         model = Document

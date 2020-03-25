@@ -48,7 +48,7 @@ def signup_view(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('notehub/user_panel')
+            return redirect('notehub:list')
     else:
         form = SignupForm()
     return render(request, 'notehub/signup.html', context={'form': form})
@@ -59,7 +59,7 @@ def add_document_view(request):
         form = AddDocumentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('notehub/list')
+            return redirect('notehub:list')
     else:
         form = AddDocumentForm()
     return render(request, 'notehub/user_panel.html', context={'form': form})
