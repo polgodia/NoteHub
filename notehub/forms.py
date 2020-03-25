@@ -3,13 +3,13 @@ from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError
 
-from notehub.models import Student
+from notehub.models import Student, Document
 
 
 class SignupForm(ModelForm):
-    username = forms.CharField(max_length=20)
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput, strip=False)
-    password2 = forms.CharField(label="Password2", widget=forms.PasswordInput, strip=False)
+    username = forms.CharField(max_length=20, required=True)
+    password1 = forms.CharField(label="Password", widget=forms.PasswordInput, strip=False, required=True)
+    password2 = forms.CharField(label="Password2", widget=forms.PasswordInput, strip=False, required=True)
     DNI = forms.CharField(max_length=20, required=True)
     degree = forms.CharField(max_length=50, required=True)
     starting_date = forms.DateField(required=True)
@@ -29,3 +29,15 @@ class SignupForm(ModelForm):
 
         if passw != passw2:
             raise ValidationError('Passwords do not coincide')
+
+
+class AddDocumentForm(ModelForm):
+    name = forms.CharField(max_length=50, required=True)
+    content = forms.CharField(blank=True, null=True, required=True)
+    degree = forms.CharField(max_length=50, required=True)
+    subject = forms.CharField(max_length=50, required=True)
+    last_update = forms.DateField(default=datetime.date.today(), required=True)
+
+    class Meta:
+        model = Document
+        fields = ['name', 'content', 'degree', 'subject', 'last_update']
