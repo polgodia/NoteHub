@@ -1,4 +1,5 @@
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -48,12 +49,17 @@ def signup_view(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('notehub:list')
+            return redirect('notehub:user_panel')
     else:
         form = SignupForm()
     return render(request, 'notehub/signup.html', context={'form': form})
 
 
+def user_panel_view(request):
+    return render(request, 'notehub/user_panel.html')
+
+
+@login_required(login_url="/login/")
 def add_document_view(request):
     if request.method == 'POST':
         form = AddDocumentForm(request.POST)
@@ -62,7 +68,7 @@ def add_document_view(request):
             return redirect('notehub:list')
     else:
         form = AddDocumentForm()
-    return render(request, 'notehub/user_panel.html', context={'form': form})
+    return render(request, 'notehub/add_document.html', context={'form': form})
 
 
 def login_view(request):

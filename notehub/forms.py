@@ -27,12 +27,12 @@ class SignupForm(ModelForm):
             raise ValidationError('Invalid date')
 
         if passw != passw2:
-            raise ValidationError('Passwords do not coincide')
+            raise ValidationError('Passwords do not match')
 
 
 class AddDocumentForm(ModelForm):
     name = forms.CharField(max_length=50, required=True)
-    content = forms.CharField(max_length=2000, required=True)
+    content = forms.CharField(widget=forms.Textarea, required=True)
     degree = forms.CharField(max_length=50, required=True)
     subject = forms.CharField(max_length=50, required=True)
     last_update = forms.DateField(required=True)
