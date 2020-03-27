@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Escolleix quin tipus de document vols penjar</title>
+{% extends 'notehub/base_layout.html' %}
 
-</head>
-<body>
-    <a href="/addExercice">Exercise</a>
-    <hr />
-    <a href="/addExam">Exam</a>
-    <hr />
-    <a href="/addNote">Note</a>
-
-</body>
-</html>
+{% block content %}
+    <h1>Add document</h1>
+    <form class="site-form" action="/notehub/add_document/" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Upload">
+    </form>
+{% endblock %}
