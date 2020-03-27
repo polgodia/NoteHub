@@ -16,19 +16,32 @@ def home(request):
     return render(request, template_name, context={'title': 'app_name'})
 
 
-def register(request):
-    template_name = 'notehub/register.html'
-    return render(request, template_name, context={'title': 'register'})
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('notehub/user_panel.html')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'notehub/login.html', context={'form': form})
 
 
-def sign_in(request):
-    template_name = 'notehub/sign_in.html'
-    return render(request, template_name, context={'title': 'sign_in'})
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('notehub/user_panel.html')
+    else:
+        form = SignupForm()
+    return render(request, 'notehub/signup.html', context={'form': form})
 
 
-def return_view(request):
+def user_panel(request):
     template_name = 'notehub/user_panel.html'
-    return render(request, template_name, context={'title': 'return'})
+    return render(request, template_name, context={'title':'user panel'})
 
 
 def documents_list(request):
@@ -46,17 +59,6 @@ def document_detail(request, id):
 def add_document_view(request):
     template_name = 'notehub/add_document.html'
     return render(request, template_name, context={'title': 'addDocument'})
-
-
-def signup_view(request):
-    if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('notehub:list')
-    else:
-        form = SignupForm()
-    return render(request, 'notehub/signup.html', context={'form': form})
 
 
 def add_exam_view(request):
@@ -92,19 +94,12 @@ def add_note_view(request):
     return render(request, 'notehub/add_document.html', context={'form': form})
 
 
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('notehub/user_panel.html')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'notehub/login.html', context={'form': form})
-
-
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
         return redirect('notehub:list')
+
+
+def return_view(request):
+    template_name = 'notehub/user_panel.html'
+    return render(request, template_name, context={'title': 'return'})
