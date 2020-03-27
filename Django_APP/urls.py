@@ -18,17 +18,14 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 
-from notehub.views import home, register, sign_in, signup_view, login_view, logout_view,return_view, add_document_view
+from notehub.views import home, signup_view, login_view, logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', home, name='notehub'),
-    url(r'^register/', register, name='register'),
-    url(r'^sign_in/', sign_in, name='sign_in'),
     url(r'^signup/', signup_view, name='signup'),
     url(r'^login/', login_view, name='login'),
     url(r'^logout/', logout_view, name='logout'),
-    url(r'^return/', return_view, name='return'),
     url(r'^notehub/', include('notehub.urls')),
 ]
 

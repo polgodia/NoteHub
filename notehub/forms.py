@@ -2,7 +2,7 @@ from datetime import datetime
 from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError
-from notehub.models import Student, Document
+from notehub.models import Student, Document, Exam, Exercice, Note
 
 
 class SignupForm(ModelForm):
@@ -30,13 +30,42 @@ class SignupForm(ModelForm):
             raise ValidationError('Passwords do not match')
 
 
-class AddDocumentForm(ModelForm):
+class AddExamForm(ModelForm):
+    PARCIAL_NUMBER = ((1, 'First'), (2, 'Second'))
     name = forms.CharField(max_length=50, required=True)
     content = forms.CharField(widget=forms.Textarea, required=True)
     degree = forms.CharField(max_length=50, required=True)
     subject = forms.CharField(max_length=50, required=True)
-    last_update = forms.DateField(required=True)
+    date = forms.DateField()
+    parcial = forms.CheckboxSelectMultiple(choices=PARCIAL_NUMBER)
+    solved = forms.BooleanField(required=True)
 
     class Meta:
-        model = Document
-        fields = ['name', 'content', 'degree', 'subject', 'last_update']
+        model = Exam
+        fields = ['name', 'content', 'degree', 'subject', 'date', 'parcial', 'solved']
+
+
+class AddExerciseForm(ModelForm):
+    name = forms.CharField(max_length=50, required=True)
+    content = forms.CharField(max_length=2000, required=True)
+    degree = forms.CharField(max_length=50, required=True)
+    subject = forms.CharField(max_length=50, required=True)
+    unit = forms.IntegerField(required=True)
+    corrected = forms.BooleanField(required=False)
+
+    class Meta:
+        model = Exercice
+        fields = ['name', 'content', 'degree', 'subject', 'unit', 'corrected']
+
+
+class AddNoteForm(ModelForm):
+    name = forms.CharField(max_length=50, required=True)
+    content = forms.CharField(max_length=2000, required=True)
+    degree = forms.CharField(max_length=50, required=True)
+    subject = forms.CharField(max_length=50, required=True)
+    unit = forms.IntegerField()
+    date = forms.DateField()
+
+    class Meta:
+        model = Note
+        fields = ['name', 'content', 'degree', 'subject', 'unit', 'date']
