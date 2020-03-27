@@ -6,7 +6,7 @@
         {% for document in documents%}
             <div class="document">
                 <h2><a href="{% url 'notehub:detail' id=document.id %}">{{ document.name }}</a></h2>
-                <p>{{ document.content }}</p>
+                <p>{{ document.last_update }}</p>
             </div>
         {% endfor %}
     </div>
