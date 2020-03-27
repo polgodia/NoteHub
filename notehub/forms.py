@@ -51,7 +51,7 @@ class AddExerciseForm(ModelForm):
     degree = forms.CharField(max_length=50, required=True)
     subject = forms.CharField(max_length=50, required=True)
     unit = forms.IntegerField(required=True)
-    corrected = forms.BooleanField(required=True)
+    corrected = forms.BooleanField(required=False)
 
     class Meta:
         model = Exercice

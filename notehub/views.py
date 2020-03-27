@@ -1,8 +1,9 @@
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from notehub.forms import SignupForm, AddExamForm, AddExerciseForm, AddNoteForm
+from notehub.forms import SignupForm, AddExerciseForm, AddNoteForm, AddExamForm
 from django.utils import timezone
 
 # Create your views here.
@@ -14,34 +15,6 @@ from notehub.models import Student, Document
 def home(request):
     template_name = 'notehub/home.html'
     return render(request, template_name, context={'title': 'app_name'})
-
-
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('notehub/user_panel.html')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'notehub/login.html', context={'form': form})
-
-
-def signup_view(request):
-    if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('notehub/user_panel.html')
-    else:
-        form = SignupForm()
-    return render(request, 'notehub/signup.html', context={'form': form})
-
-
-def user_panel(request):
-    template_name = 'notehub/user_panel.html'
-    return render(request, template_name, context={'title':'user panel'})
 
 
 def documents_list(request):
@@ -56,9 +29,43 @@ def document_detail(request, id):
     # return HttpResponse(id)
 
 
+def user_panel_view(request):
+    return render(request, 'notehub/user_panel.html')
+
+
+@login_required(login_url="/login/")
 def add_document_view(request):
     template_name = 'notehub/add_document.html'
     return render(request, template_name, context={'title': 'addDocument'})
+
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('notehub:user_panel')
+    else:
+        form = SignupForm()
+    return render(request, 'notehub/signup.html', context={'form': form})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('notehub:user_panel')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'notehub/login.html', context={'form': form})
+
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('notehub/list')
 
 
 def add_exam_view(request):
@@ -71,6 +78,10 @@ def add_exam_view(request):
         form = AddExamForm()
     return render(request, 'notehub/add_document.html', context={'form': form})
 
+def add_exercice_simple(request):
+    template_name = 'notehub/add-Exercice.html'
+    return render(request, template_name, context={'title': 'addDocument'})
+
 
 def add_exercise_view(request):
     if request.method == 'POST':
@@ -80,7 +91,7 @@ def add_exercise_view(request):
             return redirect('notehub:list')
     else:
         form = AddExerciseForm()
-    return render(request, 'notehub/add_document.html', context={'form': form})
+    return render(request, 'notehub/add_Exercice.html', context={'form': form})
 
 
 def add_note_view(request):
@@ -92,14 +103,3 @@ def add_note_view(request):
     else:
         form = AddNoteForm()
     return render(request, 'notehub/add_document.html', context={'form': form})
-
-
-def logout_view(request):
-    if request.method == 'POST':
-        logout(request)
-        return redirect('notehub:list')
-
-
-def return_view(request):
-    template_name = 'notehub/user_panel.html'
-    return render(request, template_name, context={'title': 'return'})

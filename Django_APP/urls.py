@@ -26,8 +26,6 @@ urlpatterns = [
     url(r'^signup/', signup_view, name='signup'),
     url(r'^login/', login_view, name='login'),
     url(r'^logout/', logout_view, name='logout'),
-
-
     url(r'^notehub/', include('notehub.urls')),
 ]
 
