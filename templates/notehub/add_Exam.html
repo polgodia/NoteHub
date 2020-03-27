@@ -1,0 +1,10 @@
+{% extends 'notehub/base_layout.html' %}
+
+{% block content %}
+    <h1>Add Exam</h1>
+    <form class="site-form" action="/addExam/" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="addExam">
+    </form>
+{% endblock %}

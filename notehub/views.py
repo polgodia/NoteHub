@@ -2,7 +2,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from notehub.forms import SignupForm, AddDocumentForm
+from notehub.forms import SignupForm, AddExamForm, AddExerciseForm, AddNoteForm
 from django.utils import timezone
 
 # Create your views here.
@@ -27,7 +27,7 @@ def sign_in(request):
 
 
 def return_view(request):
-    template_name = 'notehub/return_view()'
+    template_name = 'notehub/user_panel.html'
     return render(request, template_name, context={'title': 'return'})
 
 
@@ -43,6 +43,11 @@ def document_detail(request, id):
     # return HttpResponse(id)
 
 
+def add_document_view(request):
+    template_name = 'notehub/add_document.html'
+    return render(request, template_name, context={'title': 'addDocument'})
+
+
 def signup_view(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -54,15 +59,37 @@ def signup_view(request):
     return render(request, 'notehub/signup.html', context={'form': form})
 
 
-def add_document_view(request):
+def add_exam_view(request):
     if request.method == 'POST':
-        form = AddDocumentForm(request.POST)
+        form = AddExamForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('notehub:list')
     else:
-        form = AddDocumentForm()
-    return render(request, 'notehub/user_panel.html', context={'form': form})
+        form = AddExamForm()
+    return render(request, 'notehub/add_document.html', context={'form': form})
+
+
+def add_exercise_view(request):
+    if request.method == 'POST':
+        form = AddExerciseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('notehub:list')
+    else:
+        form = AddExerciseForm()
+    return render(request, 'notehub/add_document.html', context={'form': form})
+
+
+def add_note_view(request):
+    if request.method == 'POST':
+        form = AddNoteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('notehub:list')
+    else:
+        form = AddNoteForm()
+    return render(request, 'notehub/add_document.html', context={'form': form})
 
 
 def login_view(request):
@@ -80,4 +107,4 @@ def login_view(request):
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('notehub/list')
+        return redirect('notehub:list')
