@@ -76,11 +76,7 @@ def add_exam_view(request):
             return redirect('notehub:list')
     else:
         form = AddExamForm()
-    return render(request, 'notehub/add_document.html', context={'form': form})
-
-def add_exercice_simple(request):
-    template_name = 'notehub/add-Exercice.html'
-    return render(request, template_name, context={'title': 'addDocument'})
+    return render(request, 'notehub/add_Exam.html', context={'form': form})
 
 
 def add_exercise_view(request):
@@ -102,4 +98,4 @@ def add_note_view(request):
             return redirect('notehub:list')
     else:
         form = AddNoteForm()
-    return render(request, 'notehub/add_document.html', context={'form': form})
+    return render(request, 'notehub/add_Note.html', context={'form': form})
