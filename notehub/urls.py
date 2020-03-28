@@ -1,53 +1,20 @@
 from django.conf.urls import url
-from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from django.views.generic import DetailView, ListView, UpdateView
-from notehub.models import Student, Document
-#from notehub.forms import RestaurantForm, DishForm
-#from notehub.views import RestaurantCreate, DishCreate, RestaurantDetail, review
-#from notehub.views import LoginRequiredCheckIsOwnerUpdateView
+
+from notehub.views import documents_list, document_detail, add_document_view, user_panel_view, add_exam_view, \
+    add_exercise_view, add_note_view, exam_list, exercise_list, note_list, valorate_view
+
+app_name = 'notehub'
 
 urlpatterns = [
-    # List latest 5 restaurants: /myrestaurants/
-    url(r'^$',
-        ListView.as_view(
-            queryset=Document.objects.filter(date__lte=timezone.now()).order_by('-last_update')[:5],
-            context_object_name='latest_document_list',
-            template_name='notehub/document_lists.html'),
-        name='document_list'),
-
-    # Restaurant details, ex.: /myrestaurants/restaurants/1/
-   ''' url(r'^student/(?P<pk>\d+)/$',
-        Student_detail.as_view(),
-        name='student_detail'),
-
-    # Restaurant dish details, ex: /myrestaurants/restaurants/1/dishes/1/
-    url(r'^restaurants/(?P<pkr>\d+)/dishes/(?P<pk>\d+)/$',
-        DetailView.as_view(
-            model=Dish,
-            template_name='myrestaurants/dish_detail.html'),
-        name='dish_detail'),
-
-    # Create a restaurant, /myrestaurants/restaurants/create/
-    url(r'^restaurants/create/$',
-        RestaurantCreate.as_view(),
-        name='restaurant_create'),
-
-    # Edit restaurant details, ex.: /myrestaurants/restaurants/1/edit/
-    url(r'^restaurants/(?P<pk>\d+)/edit/$',
-        LoginRequiredCheckIsOwnerUpdateView.as_view(
-            model=Restaurant,
-            form_class=RestaurantForm),
-        name='restaurant_edit'),
-
-    # Create a restaurant dish, ex.: /myrestaurants/restaurants/1/dishes/create/
-    url(r'^restaurants/(?P<pk>\d+)/dishes/create/$',
-        DishCreate.as_view(),
-        name='dish_create'),
-
-    # Create a restaurant review, ex.: /myrestaurants/restaurants/1/reviews/create/
-    url(r'^restaurants/(?P<pk>\d+)/reviews/create/$',
-        review,
-        name='review_create'),
-        '''
+    url(r'^$', user_panel_view, name='user_panel'),
+    url(r'^document_list', documents_list, name='list'),
+    url(r'^exam_list', exam_list, name='exam_list'),
+    url(r'^exercise_list', exercise_list, name='exercise_list'),
+    url(r'^note_list', note_list, name= 'note_list'),
+    url(r'^addDocument/', add_document_view, name='addDocument'),
+    url(r'^addExam/', add_exam_view, name='addExam'),
+    url(r'^addExercise/', add_exercise_view, name='addExercise'),
+    url(r'^addNote/', add_note_view, name='addNote'),
+    url(r'^(?P<id>[\w-]+)/$', document_detail, name='detail'), #always last
+    url(r'^(?P<id>[\w-]+)/valorate/$', valorate_view, name='valorate'),
 ]

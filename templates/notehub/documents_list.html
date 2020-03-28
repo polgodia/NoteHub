@@ -1,0 +1,21 @@
+{% extends 'notehub/base_layout.html' %}
+
+{% block content %}
+    <ul>
+        <li>
+            <form class="panel-link" action="{% url 'notehub:user_panel' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Home</button>
+            </form>
+        </li>
+    </ul>
+    <h1>Document list</h1>
+    <div class="documents">
+        {% for document in documents%}
+            <div class="document">
+                <h2><a href="{% url 'notehub:detail' id=document.id %}">{{ document.name }}</a></h2>
+                <p>{{ document.last_update }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

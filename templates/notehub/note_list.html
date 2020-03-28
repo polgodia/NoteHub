@@ -1,0 +1,23 @@
+{% extends 'notehub/base_layout.html' %}
+
+{% block content %}
+    <ul>
+        <li>
+            <form class="panel-link" action="{% url 'notehub:user_panel' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Home</button>
+            </form>
+        </li>
+    </ul>
+    <hr />
+    <h1>Notes list</h1>
+    <div class="notes">
+        {% for note in notes %}
+            <div class="note">
+                <h2><a href="{% url 'notehub:detail' id=note.id %}">{{ note.name }}</a></h2>
+                <p>{{ note.last_update }}</p>
+            </div>
+            <hr />
+        {% endfor %}
+    </div>
+{% endblock %}

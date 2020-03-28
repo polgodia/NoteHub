@@ -1,0 +1,23 @@
+{% extends 'notehub/base_layout.html' %}
+
+{% block content %}
+    <ul>
+        <li>
+            <form class="panel-link" action="{% url 'notehub:user_panel' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Home</button>
+            </form>
+        </li>
+    </ul>
+    <hr />
+    <h1>Exams list</h1>
+    <div class="exams">
+        {% for exam in exams %}
+            <div class="exam">
+                <h2><a href="{% url 'notehub:detail' id=exam.id %}">{{ exam.name }}</a></h2>
+                <p>{{ exam.last_update }}</p>
+            </div>
+            <hr />
+        {% endfor %}
+    </div>
+{% endblock %}
