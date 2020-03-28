@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from notehub.views import documents_list, document_detail, add_document_view, user_panel_view, add_exam_view, \
-    add_exercise_view, add_note_view, add_exercice_simple
+    add_exercise_view, add_note_view
 
 app_name = 'notehub'
 
@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'^addExam/', add_exam_view, name='addExam'),
     url(r'^addExercise/', add_exercise_view, name='addExercise'),
     url(r'^addNote/', add_note_view, name='addNote'),
-    #url(r'^(?P<id>[\w-]+)/$', document_detail, name='detail') #always last
+    url(r'^(?P<id>[\w-]+)/$', document_detail, name='detail') #always last
 ]

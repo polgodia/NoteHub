@@ -7,7 +7,7 @@ from notehub.models import Student, Document, Exam, Exercice, Note
 
 class SignupForm(ModelForm):
     username = forms.CharField(max_length=20, required=True)
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput, strip=False, required=True)
+    password = forms.CharField(label="Password", widget=forms.PasswordInput, strip=False, required=True)
     password2 = forms.CharField(label="Password2", widget=forms.PasswordInput, strip=False, required=True)
     DNI = forms.CharField(max_length=20, required=True)
     degree = forms.CharField(max_length=50, required=True)
@@ -15,7 +15,7 @@ class SignupForm(ModelForm):
 
     class Meta:
         model = Student
-        fields = ['username', 'password1', 'password2', 'DNI', 'degree', 'starting_date']
+        fields = ['username', 'password', 'password2', 'DNI', 'degree', 'starting_date']
 
     def clean_renewal_date(self):
         start = self.cleaned_data['starting_date']
