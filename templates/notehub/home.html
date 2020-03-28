@@ -1,10 +1,12 @@
 
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <link rel="stylesheet" href="{% static "style/base.css" %}" />
+     <link rel="stylesheet" href="{% static "welcome.css" %}" />
      <title>{% block title %} Home{% endblock %}</title>
+     <h1 align="center"><img src="{% static 'logo.png' %}" height="80" width="200"> </h1>
 </head>
 <body>
 <div id="header">
@@ -16,11 +18,13 @@
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
      {% endblock %}
 </div>
+<div align="center">
 <a href="/admin">Access as Admin</a>
 <hr />
 <a href="/signup">Register</a>
 <hr />
 <a href="/login">Sign in</a>
+</div>
 <div id="footer">{% block footer %}{% endblock %}</div>
 </body>
 </html>
