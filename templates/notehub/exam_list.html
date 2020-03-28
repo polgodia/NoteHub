@@ -9,6 +9,7 @@
             </form>
         </li>
     </ul>
+    <hr />
     <h1>Exams list</h1>
     <div class="exams">
         {% for exam in exams %}
@@ -16,6 +17,7 @@
                 <h2><a href="{% url 'notehub:detail' id=exam.id %}">{{ exam.name }}</a></h2>
                 <p>{{ exam.last_update }}</p>
             </div>
+            <hr />
         {% endfor %}
     </div>
 {% endblock %}

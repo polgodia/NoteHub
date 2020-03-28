@@ -3,11 +3,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <ul>
+        <li>
+            <form class="panel-link" action="{% url 'notehub:user_panel' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Home</button>
+            </form>
+        </li>
+    </ul>
     <meta charset="UTF-8">
-    <title>Escolleix quin tipus de document vols penjar</title>
-
 </head>
 <body>
+    <hr />
+    <h2>Choose the kind of document you want to upload</h2>
+    <br>
     <a href="/notehub/addExercise">Exercise</a>
     <hr />
     <a href="/notehub/addExam">Exam</a>

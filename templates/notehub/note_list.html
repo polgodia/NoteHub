@@ -9,6 +9,7 @@
             </form>
         </li>
     </ul>
+    <hr />
     <h1>Notes list</h1>
     <div class="notes">
         {% for note in notes %}
@@ -16,6 +17,7 @@
                 <h2><a href="{% url 'notehub:detail' id=note.id %}">{{ note.name }}</a></h2>
                 <p>{{ note.last_update }}</p>
             </div>
+            <hr />
         {% endfor %}
     </div>
 {% endblock %}

@@ -9,10 +9,11 @@
             </form>
         </li>
      </ul>
+    <hr />
     <h1>Sign up</h1>
     <form class="site-form"  method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" value="addExercice">
+        <input type="submit" value="Upload">
     </form>
 {% endblock %}

@@ -9,6 +9,7 @@
             </form>
         </li>
     </ul>
+    <hr />
     <h1>Exercises list</h1>
     <div class="exercises">
         {% for exercise in exercises %}
@@ -16,6 +17,7 @@
                 <h2><a href="{% url 'notehub:detail' id=exercise.id %}">{{ exercise.name }}</a></h2>
                 <p>{{ exercise.last_update }}</p>
             </div>
+            <hr />
         {% endfor %}
     </div>
 {% endblock %}

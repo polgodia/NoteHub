@@ -131,3 +131,8 @@ def add_note_view(request):
     else:
         form = AddNoteForm()
     return render(request, 'notehub/add_Note.html', context={'form': form})
+
+def valorate_view(request):
+    document = Document.objects.get(id=id)
+    template_name = 'notehub/valorate.html'
+    return render(request, template_name, {'document': document})
