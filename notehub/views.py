@@ -56,7 +56,10 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('notehub:user_panel')
+            if 'next' in request.POST:
+                return redirect(request.POST.get('next'))
+            else:
+                return redirect('notehub:user_panel')
     else:
         form = AuthenticationForm()
     return render(request, 'notehub/login.html', context={'form': form})
@@ -65,7 +68,7 @@ def login_view(request):
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('notehub/list')
+        return redirect('notehub:list')
 
 
 def add_exam_view(request):
@@ -83,7 +86,9 @@ def add_exercise_view(request):
     if request.method == 'POST':
         form = AddExerciseForm(request.POST)
         if form.is_valid():
-            form.save()
+            exercise = form.save(commit=False)
+            exercise.creator = request.user
+            exercise.save()
             return redirect('notehub:list')
     else:
         form = AddExerciseForm()
