@@ -1,6 +1,14 @@
 {% extends 'notehub/base_layout.html' %}
 
 {% block content %}
+    <ul>
+        <li>
+            <form class="panel-link" action="{% url 'notehub:user_panel' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Home</button>
+            </form>
+        </li>
+    </ul>
     <h1>Notes list</h1>
     <div class="notes">
         {% for note in notes %}

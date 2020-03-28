@@ -52,10 +52,10 @@ class Exam(Document):
 
 
 class Note(Document):
-    POSSIBLE_DEGREES = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
+    #POSSIBLE_DEGREES = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
     unit = models.IntegerField()
     date = models.DateField()
-    schematization_degree = models.PositiveSmallIntegerField(blank=False, choices=POSSIBLE_DEGREES)
+    #schematization_degree = models.PositiveSmallIntegerField(blank=False, choices=POSSIBLE_DEGREES)
 
 
 class Valoration(models.Model):
