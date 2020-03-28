@@ -1,33 +1,33 @@
 from datetime import datetime
+
+from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError
-from notehub.models import Student, Document, Exam, Exercice, Note
+from notehub.models import Student, Exam, Exercise, Note
 
 
-class SignupForm(ModelForm):
+class SignupForm(UserCreationForm):
     username = forms.CharField(max_length=20, required=True)
-    password = forms.CharField(label="Password", widget=forms.PasswordInput, strip=False, required=True)
-    password2 = forms.CharField(label="Password2", widget=forms.PasswordInput, strip=False, required=True)
     DNI = forms.CharField(max_length=20, required=True)
     degree = forms.CharField(max_length=50, required=True)
     starting_date = forms.DateField(required=True)
 
     class Meta:
         model = Student
-        fields = ['username', 'password', 'password2', 'DNI', 'degree', 'starting_date']
+        fields = ['username', 'password1', 'password2', 'DNI', 'degree', 'starting_date']
 
     def clean_renewal_date(self):
         start = self.cleaned_data['starting_date']
-        passw = self.cleaned_data['password1']
-        passw2 = self.cleaned_data['password2']
+        #passw = self.cleaned_data['password1']
+        #passw2 = self.cleaned_data['password2']
 
         # Check date is not in past.
         if start < datetime.date.today():
             raise ValidationError('Invalid date')
 
-        if passw != passw2:
-            raise ValidationError('Passwords do not match')
+        #if passw != passw2:
+         #   raise ValidationError('Passwords do not match')
 
 
 class AddExamForm(ModelForm):
@@ -38,7 +38,7 @@ class AddExamForm(ModelForm):
     subject = forms.CharField(max_length=50, required=True)
     date = forms.DateField()
     parcial = forms.CheckboxSelectMultiple(choices=PARCIAL_NUMBER)
-    solved = forms.BooleanField(required=True)
+    solved = forms.BooleanField(required=False)
 
     class Meta:
         model = Exam
@@ -54,7 +54,7 @@ class AddExerciseForm(ModelForm):
     corrected = forms.BooleanField(required=False)
 
     class Meta:
-        model = Exercice
+        model = Exercise
         fields = ['name', 'content', 'degree', 'subject', 'unit', 'corrected']
 
 

@@ -1,0 +1,13 @@
+{% extends 'notehub/base_layout.html' %}
+
+{% block content %}
+    <h1>Notes list</h1>
+    <div class="notes">
+        {% for note in notes %}
+            <div class="note">
+                <h2><a href="{% url 'notehub:detail' id=note.id %}">{{ note.name }}</a></h2>
+                <p>{{ note.last_update }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

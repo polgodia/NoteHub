@@ -1,0 +1,13 @@
+{% extends 'notehub/base_layout.html' %}
+
+{% block content %}
+    <h1>Exercises list</h1>
+    <div class="exams">
+        {% for exam in exams %}
+            <div class="exam">
+                <h2><a href="{% url 'notehub:detail' id=exercise.id %}">{{ exercise.name }}</a></h2>
+                <p>{{ exercise.last_update }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

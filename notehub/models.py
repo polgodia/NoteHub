@@ -38,7 +38,7 @@ class Document(models.Model):
       #                 kwargs={'pkr': self.document.pk, 'pk': self.pk})
 
 
-class Exercice(Document):
+class Exercise(Document):
     unit = models.IntegerField()
     corrected = models.BooleanField(default=False)
 
@@ -47,7 +47,7 @@ class Exam(Document):
     PARCIAL_NUMBER = ((1, 'First'), (2, 'Second'))
     date = models.DateField()
     parcial = models.PositiveSmallIntegerField(choices=PARCIAL_NUMBER)
-    exercices = models.ManyToManyField(Exercice)
+    exercices = models.ManyToManyField(Exercise)
     solved = models.BooleanField(default=False)
 
 
