@@ -1,5 +1,9 @@
 # NoteHub
 
+Albert Planes Seuma
+
+Pol Gòdia Solé
+
 In order to enter as an Admin to the page:
 
 - User: admin
