@@ -36,7 +36,7 @@ class AddExamForm(ModelForm):
     content = forms.CharField(widget=forms.Textarea, required=True)
     degree = forms.CharField(max_length=50, required=True)
     subject = forms.CharField(max_length=50, required=True)
-    date = forms.DateField()
+    date = forms.DateField(required=True)
     parcial = forms.CheckboxSelectMultiple(choices=PARCIAL_NUMBER)
     solved = forms.BooleanField(required=False)
 
@@ -63,8 +63,8 @@ class AddNoteForm(ModelForm):
     content = forms.CharField(max_length=2000, required=True)
     degree = forms.CharField(max_length=50, required=True)
     subject = forms.CharField(max_length=50, required=True)
-    unit = forms.IntegerField()
-    date = forms.DateField()
+    unit = forms.IntegerField(required=True)
+    date = forms.DateField(required=True)
 
     class Meta:
         model = Note
