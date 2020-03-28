@@ -17,37 +17,37 @@ def home(request):
     template_name = 'notehub/home.html'
     return render(request, template_name, context={'title': 'app_name'})
 
-
+@login_required(login_url="/login/")
 def documents_list(request):
     documents = Document.objects.all().order_by('id')
     template_name = 'notehub/documents_list.html'
     return render(request, template_name, {'documents': documents})
 
-
+@login_required(login_url="/login/")
 def exam_list(request):
     exams = Exam.objects.all().order_by('id')
     template_name = 'notehub/exam_list.html'
     return render(request, template_name, {'exams': exams})
 
-
+@login_required(login_url="/login/")
 def note_list(request):
     notes = Note.objects.all().order_by('id')
     template_name = 'notehub/note_list.html'
     return render(request, template_name, {'notes': notes})
 
-
+@login_required(login_url="/login/")
 def exercise_list(request):
     exercises = Exercise.objects.all().order_by('id')
     template_name = 'notehub/exercise_list.html'
     return render(request, template_name, {'exercises': exercises})
 
-
+@login_required(login_url="/login/")
 def document_detail(request, id):
     document = Document.objects.get(id=id)
     return render(request, 'notehub/document_detail.html', {'document': document})
     # return HttpResponse(id)
 
-
+@login_required(login_url="/login/")
 def user_panel_view(request):
     return render(request, 'notehub/user_panel.html')
 
@@ -89,7 +89,7 @@ def logout_view(request):
         logout(request)
         return redirect('home')
 
-
+@login_required(login_url="/login/")
 def add_exam_view(request):
     if request.method == 'POST':
         form = AddExamForm(request.POST)
@@ -103,7 +103,7 @@ def add_exam_view(request):
         form = AddExamForm()
     return render(request, 'notehub/add_Exam.html', context={'form': form})
 
-
+@login_required(login_url="/login/")
 def add_exercise_view(request):
     if request.method == 'POST':
         form = AddExerciseForm(request.POST)
@@ -118,7 +118,7 @@ def add_exercise_view(request):
         form = AddExerciseForm()
     return render(request, 'notehub/add_Exercice.html', context={'form': form})
 
-
+@login_required(login_url="/login/")
 def add_note_view(request):
     if request.method == 'POST':
         form = AddNoteForm(request.POST)
